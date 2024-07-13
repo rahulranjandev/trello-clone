@@ -7,6 +7,7 @@ import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import projectRoutes from './project.routes';
 import taskRoutes from './task.routes';
+import taskBoardRoutes from './TaskBoard.routes';
 
 /**
  * @description Status Routes - /health - Public Routes
@@ -42,6 +43,13 @@ router.use('/api/user', userRoutes);
  * @access Protected Routes
  */
 router.use('/api/project', projectRoutes);
+
+/**
+ * @description TaskBoard Routes - /api/task-board - Private Routes
+ * @route /api/task-board
+ * @access Protected Routes
+ */
+router.use('/api/task-board', taskBoardRoutes);
 
 /**
  * @description Task Routes - /api/task - Private Routes

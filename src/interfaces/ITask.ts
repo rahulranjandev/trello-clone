@@ -1,5 +1,6 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { Task, ITask } from '@models/taskModel';
+import { Project, IProject } from '@models/projectModel';
 
 export class TaskService {
   /**
@@ -12,21 +13,12 @@ export class TaskService {
   }
 
   /**
-   * @description Get All Tasks By Project ID
-   * @Access User access - Protected
-   * @param projectId
-   */
-  public async getTasksByProjectId(projectId: string): Promise<ITask[]> {
-    return await Task.find({ projectId }).lean();
-  }
-
-  /**
    * @description Get Task By Task ID
    * @Access User access - Protected
    * @param taskId
    */
   public async getTaskById(taskId: string): Promise<ITask | null> {
-    return await Task.findById(taskId);
+    return await Task.findById(taskId).populate('taskBoardId', 'name');
   }
 
   /**
@@ -36,7 +28,7 @@ export class TaskService {
    * @param task
    */
   public async updateTask(id: string, task: ITask | any): Promise<ITask | null> {
-    return await Task.findOneAndUpdate({ _id: id }, task, { upsert: false });
+    return await Task.findOneAndUpdate({ _id: id }, task, { upsert: false, new: true });
   }
 
   /**

@@ -2,10 +2,9 @@ import { Schema, model } from 'mongoose';
 
 interface ITask {
   _id?: string;
-  projectId: Schema.Types.ObjectId;
+  taskBoardId: Schema.Types.ObjectId;
   name: string;
   description: string;
-  status: string;
   tags: string[];
   dueDate: Date;
   assignee: Schema.Types.ObjectId[];
@@ -14,10 +13,10 @@ interface ITask {
 
 const taskSchema = new Schema<ITask>(
   {
-    projectId: {
+    taskBoardId: {
       type: Schema.Types.ObjectId,
-      ref: 'Project',
-      required: true,
+      ref: 'TaskBoard',
+      required: [true, 'Please add a task board ID'],
     },
     name: {
       type: String,
@@ -26,11 +25,6 @@ const taskSchema = new Schema<ITask>(
     description: {
       type: String,
       required: [true, 'Please add a description for the task'],
-    },
-    status: {
-      type: String,
-      enum: ['Backlog', 'In Discussion', 'In Progress', 'Done'],
-      default: 'Backlog',
     },
     tags: {
       type: [String],

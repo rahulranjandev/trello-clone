@@ -5,6 +5,7 @@ interface IProject {
   name: string;
   description: string;
   userId: Schema.Types.ObjectId;
+  taskBoards: Schema.Types.ObjectId[];
   createdAt?: Date;
 }
 
@@ -18,6 +19,12 @@ const projectSchema = new Schema<IProject>(
       type: String,
       required: [true, 'Please add a description for the project'],
     },
+    taskBoards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'TaskBoard',
+      },
+    ],
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',

@@ -7,7 +7,6 @@
       "dynamicImport": true
     },
     "target": "es2020",
-
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],

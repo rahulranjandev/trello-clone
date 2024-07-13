@@ -30,17 +30,16 @@ This is Trello-Clone Backend API. It is a RESTful API that allows users to creat
 - Git
 - GitHub
 - VS Code
-- Mac OS Terminal
+- Terminal
 
 ## Tasks Completed
 
 - [x] User Authentication
-- [ ] Create, read, update, and delete Project Boards
-- [ ] Create, read, update, and delete Tasks
+- [x] Create, read, update, and delete Project Boards
+- [x] Create, read, update, and delete Tasks
 - [x] Restrict access to authenticated users only using JWT tokens
-- [ ] Validation using Zod which is a TypeScript-first schema declaration and validation library
-- [ ] Error handling middleware
+- [x] Validation using Zod which is a TypeScript-first schema declaration and validation library
+- [x] Error handling middleware
 - [ ] Deployed on Azure
 - [ ] Dockerized application
 - [ ] Postman Testing
-

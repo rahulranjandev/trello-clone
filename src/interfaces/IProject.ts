@@ -1,7 +1,22 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import { FilterQuery, QueryOptions, Schema, UpdateQuery } from 'mongoose';
 import { Project, IProject } from '@models/projectModel';
 
 export class ProjectService {
+  /**
+   * @description Remove TaskBoard from Project
+   * @Access User access - Protected
+   */
+  public async removeTaskBoardFromProject(projectId: string | any, taskBoardId: string | any) {
+    return await Project.findOneAndUpdate({ _id: projectId }, { $pull: { taskBoards: taskBoardId } }, { new: true });
+  }
+
+  /**
+   * @description Add TaskBoard to Project
+   * @Access User access - Protected
+   */
+  public async addTaskBoardToProject(projectId: string | any, _id: string | any) {
+    return await Project.findOneAndUpdate({ _id: projectId }, { $push: { taskBoards: _id } }, { new: true });
+  }
   /**
    * @description Create Project
    * @Access User access - Protected

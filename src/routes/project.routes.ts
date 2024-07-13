@@ -37,27 +37,6 @@ router.post(
 router.get('/', authMiddleware.isAuthenticated, authMiddleware.requireUser, projectController.getProjects);
 
 /**
- * @description Get Project By Id with all tasks (Need to check)
- * @Access User access - Protected
- * @alias GET /api/project/:projectId
- */
-// router.get('/:projectId', authMiddleware.isAuthenticated, authMiddleware.requireUser, projectController.getProjectById);
-
-/**
- * @description Get All Tasks By Project ID
- * @Access User access - Protected
- * @alias GET /api/project/:projectId/tasks
- */
-router.get(
-  '/:projectId/tasks',
-
-  authMiddleware.isAuthenticated,
-  authMiddleware.requireUser,
-  validateSchema(getTasksByProjectIdSchema),
-
-  taskController.getTasksByProjectId
-);
-/**
  * @description Update Project
  * @Access User access - Protected
  * @alias PUT /api/project/:projectId
@@ -77,7 +56,6 @@ router.put(
  * @Access User access - Protected
  * @alias DELETE /api/project/:projectId
  */
-
 router.delete(
   '/:projectId',
   authMiddleware.isAuthenticated,
