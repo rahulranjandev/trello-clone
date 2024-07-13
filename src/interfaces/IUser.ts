@@ -38,7 +38,7 @@ export class UserService {
    * @Access User access - Protected
    */
   public async updateUser(id: string, user: IUser | any): Promise<IUser | null> {
-    return await User.findOneAndUpdate({ _id: id }, user, { upsert: true });
+    return await User.findOneAndUpdate({ _id: id }, user, { upsert: false });
   }
 
   /**

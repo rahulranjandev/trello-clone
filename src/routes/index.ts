@@ -5,6 +5,8 @@ const router = Router();
 
 import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
+import projectRoutes from './project.routes';
+import taskRoutes from './task.routes';
 
 /**
  * @description Status Routes - /health - Public Routes
@@ -30,7 +32,22 @@ router.use('/api/auth', authRoutes);
 /**
  * @description User Routes - /api/user - Private Routes
  * @route /api/user
+ * @access Protected Routes
  */
 router.use('/api/user', userRoutes);
+
+/**
+ * @description Project Routes - /api/project - Private Routes
+ * @route /api/project
+ * @access Protected Routes
+ */
+router.use('/api/project', projectRoutes);
+
+/**
+ * @description Task Routes - /api/task - Private Routes
+ * @route /api/task
+ * @access Protected Routes
+ */
+router.use('/api/task', taskRoutes);
 
 export default router;
