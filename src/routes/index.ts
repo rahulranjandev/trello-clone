@@ -7,7 +7,7 @@ import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import projectRoutes from './project.routes';
 import taskRoutes from './task.routes';
-import taskBoardRoutes from './TaskBoard.routes';
+import taskBoardRoutes from './taskBoard.routes';
 
 /**
  * @description Status Routes - /health - Public Routes
