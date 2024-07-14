@@ -1,4 +1,4 @@
-import { FilterQuery, QueryOptions, Schema, UpdateQuery } from 'mongoose';
+import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { Project, IProject } from '@models/projectModel';
 
 export class ProjectService {

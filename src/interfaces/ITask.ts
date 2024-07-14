@@ -1,6 +1,5 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { Task, ITask } from '@models/taskModel';
-import { Project, IProject } from '@models/projectModel';
 
 export class TaskService {
   /**

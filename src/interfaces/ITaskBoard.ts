@@ -11,6 +11,7 @@ export class TaskBoardService {
   public async removeTaskFromTaskBoard(taskBoardId: string | any, taskId: string | any) {
     return await TaskBoard.findOneAndUpdate({ _id: taskBoardId }, { $pull: { tasks: taskId } }, { new: true });
   }
+
   /**
    * @description Remove Task from TaskBoard
    * @Access User access - Protected
@@ -20,6 +21,12 @@ export class TaskBoardService {
   public async addTaskToTaskBoard(taskBoardId: string | any, taskId: string | any) {
     return await TaskBoard.findOneAndUpdate({ _id: taskBoardId }, { $push: { tasks: taskId } }, { new: true });
   }
+
+  /**
+   * @description Get TaskBoard By ID
+   * @Access User access - Protected
+   * @param taskBoardId
+   */
   public async getTaskBoardById(taskBoardId: string) {
     return await TaskBoard.findById(taskBoardId);
   }
