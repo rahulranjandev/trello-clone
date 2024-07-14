@@ -14,7 +14,7 @@ export const createTaskBoardSchema = z.object({
 
 export const getTaskBoardSchema = z.object({
   params: z.object({
-    taskBoardId: z.string({ required_error: 'TaskBoard ID is required' }),
+    projectId: z.string({ required_error: 'TaskBoard ID is required' }),
   }),
 });
 

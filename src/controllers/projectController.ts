@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Types } from 'mongoose';
 
 import { ProjectService } from '@interfaces/IProject';
-import { CreateProjectInput, UpdateProjectInput } from '@/schema/projectSchema';
+import { CreateProjectInput, UpdateProjectInput, DeleteProjectInput } from '@/schema/projectSchema';
 
 export class ProjectController {
   private projectService = new ProjectService();
@@ -41,39 +41,6 @@ export class ProjectController {
       const projects = await this.projectService.getProjectsByUser(res.locals.user.id);
 
       return res.status(200).json({ data: projects });
-    } catch (err: any) {
-      res.status(500).send('Internal Server Error');
-      console.error(err.message);
-    }
-  };
-
-  /**
-   * @description Get Project By Id with all tasks (Need to check)
-   * @Access User access - Protected
-   */
-  public getProjectById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const projectId = req.params.projectId;
-      const userId = res.locals.user.id;
-
-      if (!Types.ObjectId.isValid(projectId)) {
-        return res.status(400).json({ message: 'Invalid Project ID' });
-      }
-
-      // Check if project Owner is the same as the user
-      const projectOwner = await this.projectService.getProjectByQuery({ _id: projectId, userId: userId });
-
-      if (!projectOwner) {
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
-
-      const project = await this.projectService.getProjectById(projectId);
-
-      if (!project) {
-        return res.status(404).json({ message: 'Project not found' });
-      }
-
-      return res.status(200).json({ data: project });
     } catch (err: any) {
       res.status(500).send('Internal Server Error');
       console.error(err.message);
@@ -136,7 +103,7 @@ export class ProjectController {
    * @description Delete Project
    * @Access User access - Protected
    */
-  public deleteProject = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteProject = async (req: Request<DeleteProjectInput['params']>, res: Response, next: NextFunction) => {
     try {
       const projectId = req.params.projectId;
       const userId = res.locals.user.id;

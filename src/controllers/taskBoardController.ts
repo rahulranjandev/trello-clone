@@ -54,10 +54,14 @@ export class TaskBoardController {
   };
 
   /**
-   * @description Get TaskBoard By Project ID
+   * @description Get Project Board By Project ID
    * @Access User access - Protected
    */
-  public getTaskBoardByProjectId = async (req: Request, res: Response, next: NextFunction) => {
+  public getTaskBoardByProjectId = async (
+    req: Request<GetTaskBoardInput['params']>,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const projectId = req.params.projectId;
 

@@ -17,5 +17,12 @@ export const updateProjectSchema = z.object({
   }),
 });
 
+export const deleteProjectSchema = z.object({
+  params: z.object({
+    projectId: z.string({ required_error: 'Project ID is required' }),
+  }),
+});
+
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;
 export type UpdateProjectInput = z.infer<typeof updateProjectSchema>;
+export type DeleteProjectInput = z.infer<typeof deleteProjectSchema>;

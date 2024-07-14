@@ -5,14 +5,13 @@ const router = Router();
 import AuthMiddleware from '@middlewares/authMiddleware';
 
 import { ProjectController } from '@/controllers/projectController';
-import { TaskController } from '@controllers/taskController';
-import { getTasksByProjectIdSchema } from '@schema/taskSchema';
-import { createProjectSchema, updateProjectSchema } from '@/schema/projectSchema';
+import { TaskBoardController } from '@controllers/taskBoardController';
+import { createProjectSchema, updateProjectSchema, deleteProjectSchema } from '@/schema/projectSchema';
 import validateSchema from '@/middlewares/validateSchema';
 
 const authMiddleware = new AuthMiddleware();
 const projectController = new ProjectController();
-const taskController = new TaskController();
+const taskBoardController = new TaskBoardController();
 
 /**
  * @description Create Project
@@ -37,6 +36,20 @@ router.post(
 router.get('/', authMiddleware.isAuthenticated, authMiddleware.requireUser, projectController.getProjects);
 
 /**
+ * @description Get Project Board By Project ID
+ * @Access User access - Protected
+ * @alias GET /api/project/:projectId
+ */
+router.get(
+  '/:projectId',
+
+  authMiddleware.isAuthenticated,
+  authMiddleware.requireUser,
+
+  taskBoardController.getTaskBoardByProjectId
+);
+
+/**
  * @description Update Project
  * @Access User access - Protected
  * @alias PUT /api/project/:projectId
@@ -58,8 +71,11 @@ router.put(
  */
 router.delete(
   '/:projectId',
+
   authMiddleware.isAuthenticated,
   authMiddleware.requireUser,
+  validateSchema(deleteProjectSchema),
+
   projectController.deleteProject
 );
 

@@ -187,28 +187,21 @@ export class TaskController {
    * @description Delete Task
    * @Access User access - Protected
    */
-  public deleteTask = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteTask = async (req: Request<DeleteTaskInput['params']>, res: Response, next: NextFunction) => {
     try {
       const taskId = req.params.taskId;
-      const taskBoardId = req.body.taskBoardId;
 
       if (!Types.ObjectId.isValid(taskId)) return res.status(400).json({ message: 'Bad Request, Invalid Task ID' });
-      if (!Types.ObjectId.isValid(taskBoardId))
-        return res.status(400).json({ message: 'Bad Request, Invalid Project ID' });
 
       const task = await this.taskService.getTaskById(taskId);
       if (!task) return res.status(404).json({ message: 'Bad Request, Task not found' });
-
-      if (task.taskBoardId.toString() !== taskBoardId) {
-        return res.status(401).json({ message: 'Bad Request, Task does not belong to the project' });
-      }
 
       const deletedTask = await this.taskService.deleteTask(taskId);
 
       if (!deletedTask) return res.status(400).json({ message: 'Bad Request' });
 
       // Remove task from taskBoard tasks array
-      await this.taskBoardService.removeTaskFromTaskBoard(taskBoardId, taskId);
+      await this.taskBoardService.removeTaskFromTaskBoard(task.taskBoardId, taskId);
 
       return res.status(200).json({ message: 'Task deleted successfully' });
     } catch (err: any) {

@@ -5,12 +5,7 @@ const router = Router();
 import AuthMiddleware from '@middlewares/authMiddleware';
 
 import { TaskBoardController } from '@controllers/taskBoardController';
-import {
-  createTaskBoardSchema,
-  getTaskBoardSchema,
-  updateTaskBoardSchema,
-  deleteTaskBoardSchema,
-} from '@schema/taskBoardSchema';
+import { createTaskBoardSchema, updateTaskBoardSchema, deleteTaskBoardSchema } from '@schema/taskBoardSchema';
 import validateSchema from '@/middlewares/validateSchema';
 
 const authMiddleware = new AuthMiddleware();
@@ -32,20 +27,6 @@ router.post(
 );
 
 /**
- * @description Get TaskBoard By Project ID
- * @Access User access - Protected
- * @alias GET /api/task-board/:projectId
- */
-router.get(
-  '/:projectId',
-
-  authMiddleware.isAuthenticated,
-  authMiddleware.requireUser,
-
-  taskBoardController.getTaskBoardByProjectId
-);
-
-/**
  * @description Update TaskBoard
  * @Access User access - Protected
  * @alias PUT /api/task-board/:taskBoardId
@@ -61,9 +42,9 @@ router.put(
 );
 
 /**
- * @description Get TaskBoard By Project ID
+ * @description Delete TaskBoard
  * @Access User access - Protected
- * @alias GET /api/task-board/:taskBoardId
+ * @alias DELETE /api/task-board/:taskBoardId
  */
 router.delete(
   '/:taskBoardId',

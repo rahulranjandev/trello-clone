@@ -41,9 +41,6 @@ export const deleteTaskSchema = z.object({
   params: z.object({
     taskId: z.string({ required_error: 'Task ID is required' }),
   }),
-  body: z.object({
-    taskBoardId: z.string({ required_error: 'Project ID is required' }),
-  }),
 });
 
 export const getTasksByProjectIdSchema = z.object({
