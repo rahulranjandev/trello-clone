@@ -9,7 +9,6 @@ if (!PATH) {
 config({ path: PATH });
 
 export const {
-  HOST_URL,
   NODE_ENV,
   PORT,
   MONGODB_URL,
@@ -19,10 +18,6 @@ export const {
   REFRESH_TOKEN_PRIVATE_KEY,
   REFRESH_TOKEN_PUBLIC_KEY,
 } = process.env;
-
-if (!HOST_URL) {
-  throw new Error('HOST_URL is missing');
-}
 
 if (!MONGODB_URL) {
   throw new Error('MONGODB_URL is missing');
